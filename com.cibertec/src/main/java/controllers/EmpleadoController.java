@@ -1,0 +1,79 @@
+package controllers;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import models.Empleado;
+
+public class EmpleadoController {
+		//Crear Empleado
+		public String createEmpleado(String apellidos, String nombres, int edad, String sexo, int salario) {
+			SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Empleado.class).buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			try {
+				Empleado emp = new Empleado(apellidos, nombres, edad, sexo, salario);
+				session.beginTransaction(); 
+				session.save(emp);
+				session.getTransaction().commit(); 
+				sessionFactory.close();
+				return "Empleado creado :)";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "ERROR al registrar Empleado :(";
+		}
+		
+		//Eliminar Empleado
+		public String deleteEmpleado(int id) {
+			SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Empleado.class).buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			try {
+				session.beginTransaction(); 
+				Empleado emp = session.get(Empleado.class, id);
+				session.delete(emp); 
+				session.getTransaction().commit(); 
+				sessionFactory.close(); 
+				return "Empleado eliminado correctamente :)";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "ERROR al eliminar Empleado :(";
+		}
+		
+		//Actualizar Empleado
+		public String updateEmpleado(int id,String nombres) {
+			SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Empleado.class).buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			
+			try {
+				session.beginTransaction();
+				Empleado emp = session.get(Empleado.class, id);
+				emp.setNombres(nombres);
+				session.update(emp);
+				session.getTransaction().commit();
+				sessionFactory.close();
+				return "Empleado actualizado correctamente :)";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "ERROR al actualizar Empleado :(";
+		}
+		
+		//Leer Empleado
+		public String getEmpleado(int id) {
+			SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Empleado.class).buildSessionFactory();
+			Session session = sessionFactory.openSession();
+			
+			try {
+				session.beginTransaction();
+				Empleado emp = session.get(Empleado.class, id);
+				session.getTransaction().commit();
+				sessionFactory.close();
+				return emp.toString();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "ERROR: Empleado no existe :(";
+		}
+}

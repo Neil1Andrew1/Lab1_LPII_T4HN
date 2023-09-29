@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;controllers.UsuarioController.java&apos; to &apos;EmpleadoController.java&apos;&#x0D;&#x0A;- Original project: &apos;com.cibertec&apos;&#x0D;&#x0A;- Original element: &apos;controllers.UsuarioController.java&apos;&#x0D;&#x0A;- Renamed element: &apos;controllers.EmpleadoController.java&apos;" description="Rename compilation unit &apos;UsuarioController.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;controllers{UsuarioController.java" name="EmpleadoController.java" references="false" stamp="1695958764272" version="1.0"/>
+</session>
